@@ -1,0 +1,8 @@
+{
+  "engine": "cocos-creator-js",
+  "packages": "packages",
+  "name": "tcg_battle",
+  "id": "f972a12c-0d58-46ad-979e-cd9009a55c7b",
+  "version": "2.4.3",
+  "isNew": false
+}
