@@ -1,8 +1,9 @@
 import HomeView from "../components/HomeView";
 import LobbyView from "../components/LobbyView";
+import GameInfo from "../models/GameInfo";
 import { User } from "../models/User";
 import { UserInfo } from "../models/UserInfo";
-import { generateUuid4 } from "../utils/RandomUtils";
+import { generateUuid4, popRandomElement } from "../utils/RandomUtils";
 
 const {ccclass, property} = cc._decorator;
 
@@ -16,8 +17,10 @@ export default class HomeScene extends cc.Component {
     lobbyView: LobbyView = null;
 
     start() {
+        GameInfo.init();
+
         let user = new User(generateUuid4());
-        UserInfo.getInstance().setUser(user, "");
+        UserInfo.getInstance().setUser(user, popRandomElement(GameInfo.avatarIndices));
 
         this.initHomeView();
     }

@@ -22,27 +22,9 @@ export class UserInfo {
 		return UserInfo.instance.getUserID();
 	}
 
-	setName(name: string) {
-		this.user.name = name;
-	}
-
-	setAvatar(avatar: string) {
-		if (avatar) {
-			// if (GameUtils.isUrl(avatar)) {
-			// 	avatar = authAvatar;
-			// 	return;
-			// }
-			this.user.avatar = avatar;
-		}
-	}
-
-	getAvatar(): string {
-		return this.user.avatar;
-	}
-
-	setUser(user: User, avatar: string) {
+	setUser(user: User, avatarIdx: number) {
 		this.user = user;
-		this.user.avatar = avatar;
+		this.user.avatar = avatarIdx;
 	}
 
 	getUser(): User {
