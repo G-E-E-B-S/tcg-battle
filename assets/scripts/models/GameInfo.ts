@@ -18,6 +18,11 @@ export default class GameInfo {
 
 	static MAX_HEALTH = 10;
 	static CARDS_PER_PLAYER = 5;
+	static BUFF_POTION_COST = 25;
+	static BUFF_INC = 3;
+	static DEBUFF_PORTION_COST = 30;
+	static DEBUFF_DEC = 4;
+	static FLIP_THE_TABLE_COST = 60;
 
 	static readonly TEAM1_COLOR = new cc.Color(122, 214, 88, 255);
 	static readonly TEAM2_COLOR = new cc.Color(224, 112, 88, 255);
