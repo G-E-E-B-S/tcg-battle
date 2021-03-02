@@ -34,9 +34,13 @@
       }
     ],
     "_active": true,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 32
+      }
+    ],
     "_prefab": {
-      "__id__": 32
+      "__id__": 33
     },
     "_opacity": 255,
     "_color": {
@@ -1020,7 +1024,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 54.04,
+      "width": 53.84,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1078,7 +1082,7 @@
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "b90ee1d9-f9d4-43ec-a69f-95c5094d383b"
+      "__uuid__": "d53e1f76-af91-41af-afde-3e1a76eeb68f"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
@@ -1140,6 +1144,42 @@
     },
     "fileId": "14LWAM79NF5a9tnyDbPw3k",
     "sync": false
+  },
+  {
+    "__type__": "6fb07X0NwdFUq8K7WFMGVs8",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "cardLabel": {
+      "__id__": 7
+    },
+    "cardBG": {
+      "__id__": 9
+    },
+    "profile": {
+      "__id__": 15
+    },
+    "attributeIcon": {
+      "__id__": 25
+    },
+    "attributeLabel": {
+      "__id__": 28
+    },
+    "attributeIcons": [
+      {
+        "__uuid__": "577a70e4-a38b-4749-a15e-8fc143c36717"
+      },
+      {
+        "__uuid__": "8f64e9a3-8cea-4946-8357-974319e7453a"
+      },
+      {
+        "__uuid__": "7f69e564-cc23-4a7e-a62b-bf8afb7b2267"
+      }
+    ],
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

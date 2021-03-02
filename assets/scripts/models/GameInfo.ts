@@ -24,6 +24,7 @@ export default class GameInfo {
 
 	static avatarIndices: number[];
 	static cardValues: Array<CardProps>;
+	static sprites: cc.SpriteAtlas;
 
 	static init() {
 		GameInfo.roomCode = "";

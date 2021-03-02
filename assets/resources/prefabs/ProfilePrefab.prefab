@@ -31,9 +31,13 @@
       }
     ],
     "_active": true,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 21
+      }
+    ],
     "_prefab": {
-      "__id__": 21
+      "__id__": 22
     },
     "_opacity": 255,
     "_color": {
@@ -424,8 +428,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 187,
-      "height": 462
+      "width": 348,
+      "height": 456
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -437,14 +441,14 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -15.019,
+        0,
         0,
         0,
         0,
         0,
         1,
-        0.5,
-        0.5,
+        0.35,
+        0.35,
         1
       ]
     },
@@ -477,7 +481,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "f455272d-ee7d-419c-9027-b626e296de87"
+      "__uuid__": "504ad3ed-ba70-43f7-976f-c290e3061f7a"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -490,9 +494,7 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": {
-      "__uuid__": "2e5f38f0-60a3-4aea-bb5b-362c488cf7ad"
-    },
+    "_atlas": null,
     "_id": ""
   },
   {
@@ -753,6 +755,30 @@
     },
     "fileId": "b9NQUnn3BGULMZHdVjc/7C",
     "sync": false
+  },
+  {
+    "__type__": "0e17fPgGjNPUJrPTzBjeced",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "playerName": {
+      "__id__": 19
+    },
+    "profilePic": {
+      "__id__": 11
+    },
+    "profileSprites": [
+      {
+        "__uuid__": "e6f197c0-62d3-465f-b4e9-a49ad1803131"
+      },
+      {
+        "__uuid__": "504ad3ed-ba70-43f7-976f-c290e3061f7a"
+      }
+    ],
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

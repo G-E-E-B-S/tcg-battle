@@ -16,8 +16,12 @@ export default class HomeScene extends cc.Component {
     @property(LobbyView)
     lobbyView: LobbyView = null;
 
+    @property(cc.SpriteAtlas)
+    playerSprites: cc.SpriteAtlas = null;
+
     start() {
         GameInfo.init();
+        GameInfo.sprites = this.playerSprites;
 
         let user = new User(generateUuid4());
         UserInfo.getInstance().setUser(user, popRandomElement(GameInfo.avatarIndices));

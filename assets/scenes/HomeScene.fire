@@ -174,7 +174,7 @@
       "array": [
         0,
         0,
-        935.3074360871938,
+        345.54413610999103,
         0,
         0,
         0,
@@ -6435,7 +6435,7 @@
       "__id__": 105
     },
     "profilePrefab": {
-      "__uuid__": "081a32e7-1536-4838-9f3d-547ef28e3ee8"
+      "__uuid__": "c769a41d-7ffe-4044-ba7b-f0f1003b0043"
     },
     "_id": "efvU+zF4FC+Zl9zcdKgM0x"
   },
@@ -6523,6 +6523,9 @@
     },
     "lobbyView": {
       "__id__": 143
+    },
+    "playerSprites": {
+      "__uuid__": "2e5f38f0-60a3-4aea-bb5b-362c488cf7ad"
     },
     "_id": "7c1aAKHzlE743LFJLCDMc+"
   }
