@@ -1,11 +1,25 @@
 export class backend {
 
-    damageReport(teamA: Team, cardInfo: number) {
-        
+    damageReport(teamASum: number, teamBCurrentSum: number) {
+        return ((teamBCurrentSum - teamASum) / (teamBCurrentSum)) * 100;
     }
     
     damageReportForRound(TeamASum: number, TeamBSum: number): number {
         return ((TeamBSum - TeamASum) / TeamBSum) * 100;
+    }
+
+    gameWinner(teamA: Team, teamB: Team): Team {
+        if(teamA.getHealth() < 0) return teamA;
+        if(teamB.getHealth() < 0) return teamB;
+        return null;
+    }
+
+    distributeCoinReward(team: Team, coinReward: number) {
+        team.increaseCoins(coinReward);
+    }
+
+    distributeHealthReward(team: Team, healthDiff: number) {
+        team.increaseHealth(healthDiff);
     }
 }
 
