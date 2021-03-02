@@ -7,8 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
-  "width": 1284,
-  "height": 1977,
+  "width": 148,
+  "height": 149,
   "platformSettings": {},
   "subMetas": {
     "card_gradient": {
@@ -22,14 +22,14 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 1284,
-      "height": 1977,
-      "rawWidth": 1284,
-      "rawHeight": 1977,
-      "borderTop": 0,
-      "borderBottom": 0,
-      "borderLeft": 0,
-      "borderRight": 0,
+      "width": 148,
+      "height": 149,
+      "rawWidth": 148,
+      "rawHeight": 149,
+      "borderTop": 23,
+      "borderBottom": 25,
+      "borderLeft": 50,
+      "borderRight": 50,
       "subMetas": {}
     }
   }
