@@ -1,9 +1,41 @@
+import { forEach } from '../models/arrays';
 import Dictionary from '../models/Dictionary';
-import GameInfo, { CardProps } from '../models/GameInfo';
+import GameInfo, { CardProps, Teams } from '../models/GameInfo';
+import { User } from '../models/User';
 
 const CardValues: Array<CardProps> = GameInfo.cardValues;
 
 export class Game {
+
+    teamMap: Dictionary<Teams, Team>;
+
+
+
+    constructor(players: User[]) {
+        this.initiateTeam(players);
+
+    }
+
+    initiateTeam(players: User[]): void {
+        this.teamMap = new Dictionary();
+
+
+        let membersTeam1: string[] = [];
+        let membersTeam2: string[] = [];
+        players.forEach(player => {
+            if (player.playerTeam == Teams.Team1) {
+                membersTeam1.push(player.getID());
+            } else if (player.playerTeam == Teams.Team2) {
+                membersTeam2.push(player.getID());
+            }
+        });
+
+        let team1 = new Team(membersTeam1);
+        let team2 = new Team(membersTeam2);
+
+        this.teamMap.setValue(Teams.Team1, team1);
+        this.teamMap.setValue(Teams.Team2, team2);
+    };
 
     damageReport(teamASum: number, teamBCurrentSum: number) {
         return ((teamBCurrentSum - teamASum) / (teamBCurrentSum)) * 100;
@@ -14,8 +46,8 @@ export class Game {
     }
 
     gameWinner(teamA: Team, teamB: Team): Team {
-        if (teamA.getHealth() < 0) return teamA;
-        if (teamB.getHealth() < 0) return teamB;
+        if (teamA.getHealth() < 0) return teamB;
+        if (teamB.getHealth() < 0) return teamA;
         return null;
     }
 
@@ -33,10 +65,10 @@ export class Team {
     private coins: number;
     private health: number;
 
-    constructor(playerNames: string[]) {
-        for (let i = 0; i < playerNames.length; i++) this.members.push(new Player(playerNames[i], this));
+    constructor(playerIds: string[]) {
+        for (let i = 0; i < playerIds.length; i++) this.members.push(new Player(playerIds[i], this));
         this.coins = 0;
-        this.health = 10;
+        this.health = GameInfo.MAX_HEALTH;
     }
 
     getCoins(): number {
@@ -68,10 +100,10 @@ export class Team {
 export class Player {
     private cards: Dictionary<string, CardProps>;
     private team: Team;
-    private name: string;
+    private id: string;
 
-    constructor(playerName: string, team: Team) {
-        this.name = playerName;
+    constructor(playerId: string, team: Team) {
+        this.id = playerId;
         this.team = team;
         this.init();
     }
@@ -79,11 +111,11 @@ export class Player {
     init() {
         this.cards = new Dictionary();
         const spawnedCard: CardProps = this.spawnCard();
-        for (let i = 0; i < 5; i++) this.cards.setValue(spawnedCard.name, spawnedCard);
+        for (let i = 0; i < GameInfo.CARDS_PER_PLAYER; i++) this.cards.setValue(spawnedCard.name, spawnedCard);
     }
 
-    getName(): string {
-        return this.name;
+    getId() {
+        return this.id;
     }
 
     spawnCard(): CardProps {

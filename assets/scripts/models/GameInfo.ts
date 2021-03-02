@@ -17,9 +17,10 @@ export default class GameInfo {
 	static playerTeam: Teams;
 
 	static MAX_HEALTH = 10;
+	static CARDS_PER_PLAYER = 5;
 
-	static readonly TEAM1_COLOR = new cc.Color(122,214,88,255);
-	static readonly TEAM2_COLOR = new cc.Color(224,112,88,255);
+	static readonly TEAM1_COLOR = new cc.Color(122, 214, 88, 255);
+	static readonly TEAM2_COLOR = new cc.Color(224, 112, 88, 255);
 
 	static avatarIndices: number[];
 	static cardValues: Array<CardProps>;
@@ -28,7 +29,7 @@ export default class GameInfo {
 		GameInfo.roomCode = "";
 		GameInfo.playerTeam = Teams.None;
 
-		GameInfo.avatarIndices =  Array.from(Array(30).keys()).slice(1);
+		GameInfo.avatarIndices = Array.from(Array(30).keys()).slice(1);
 
 		cc.resources.load("/jsons/CardValues", cc.JsonAsset, (err, asset) => {
 			GameInfo.cardValues = (asset as cc.JsonAsset).json;
