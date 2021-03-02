@@ -6,19 +6,17 @@ import { User } from '../models/User';
 const CardValues: Array<CardProps> = GameInfo.cardValues;
 
 export class Game {
-
     teamMap: Dictionary<Teams, Team>;
-
-
+    gameWinningTeam: Team;
+    turn: Teams;
 
     constructor(players: User[]) {
+        this.turn = Teams.Team1;
         this.initiateTeam(players);
-
     }
 
     initiateTeam(players: User[]): void {
         this.teamMap = new Dictionary();
-
 
         let membersTeam1: string[] = [];
         let membersTeam2: string[] = [];
@@ -38,16 +36,25 @@ export class Game {
     };
 
     damageReport(teamASum: number, teamBCurrentSum: number) {
+        if(teamBCurrentSum == 0) return 100;
         return ((teamBCurrentSum - teamASum) / (teamBCurrentSum)) * 100;
     }
 
     damageReportForRound(TeamASum: number, TeamBSum: number): number {
+        if (TeamBSum == 0) return 100;
+
+        let winningTeam = this.gameWinner(this.teamMap.getValue(Teams.Team1), this.teamMap.getValue(Teams.Team2));
+
+        if(winningTeam != null) {
+            return -1;
+        }
+
         return ((TeamBSum - TeamASum) / TeamBSum) * 100;
     }
 
     gameWinner(teamA: Team, teamB: Team): Team {
-        if (teamA.getHealth() < 0) return teamB;
-        if (teamB.getHealth() < 0) return teamA;
+        if (teamA.getHealth() <= 0) return teamB;
+        if (teamB.getHealth() <= 0) return teamA;
         return null;
     }
 
@@ -64,6 +71,7 @@ export class Team {
     private members: Player[];
     private coins: number;
     private health: number;
+    private currentRoundTotal: number;
 
     constructor(playerIds: string[]) {
         for (let i = 0; i < playerIds.length; i++) this.members.push(new Player(playerIds[i], this));
@@ -94,6 +102,18 @@ export class Team {
     decreaseCoins(diff: number) {
         this.coins = this.coins - diff;
     }
+
+    setCurrentRoundTotal(currentRoundTotal: number) {
+        this.currentRoundTotal = currentRoundTotal;
+    }
+
+    getCurrentRoundTotal(): number {
+        return this.currentRoundTotal;
+    }
+
+    addCurrentRoundTotal(currentVal: number) {
+        this.currentRoundTotal += currentVal;
+    }
 }
 
 
@@ -123,14 +143,22 @@ export class Player {
         return CardValues[randomNum];
     }
 
-    playCardByName(cardName: string): string {
+    playCardByName(cardName: string, isBot?: boolean): number {
+        if(isBot != null) {
+            for(let i = 0; i < CardValues.length; i++) {
+                if(CardValues[i].name == cardName) return i;
+            }
+        }
+
         if (!this.cards.containsKey(cardName)) return;
 
-        let chosenCard: string = this.cards[cardName];
         this.cards.remove(cardName);
         const spawnedCard: CardProps = this.spawnCard();
         this.cards.setValue(spawnedCard.name, spawnedCard);
-        return chosenCard;
+
+        for(let i = 0; i < CardValues.length; i++) {
+            if(CardValues[i].name == cardName) return i;
+        }
     }
 
     healingPotion(healthDiff: number, coinDiff: number) {
