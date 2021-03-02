@@ -9,6 +9,8 @@ export default class GameInfo {
 	static roomCode: string;
 	static playerTeam: Teams;
 
+	static MAX_HEALTH = 10;
+
 	static readonly TEAM1_COLOR = new cc.Color(122,214,88,255);
 	static readonly TEAM2_COLOR = new cc.Color(224,112,88,255);
 
