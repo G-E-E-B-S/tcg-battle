@@ -5,7 +5,7 @@ import ProfilePic from "../components/ProfilePic";
 import { GameController } from "../controllers/GameController";
 import GameInfo, { Teams } from "../models/GameInfo";
 import { UserInfo } from "../models/UserInfo";
-import { getRandomElement, getRandomInt, getRandomIntWithExclusion } from "../utils/RandomUtils";
+import { getRandomElement, getRandomInt, getRandomIntWithExclusion, playAnimOnce } from "../utils/RandomUtils";
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,6 +14,9 @@ export default class GameScene extends cc.Component {
 
     @property(cc.Node)
     timerNode: cc.Node = null;
+
+    @property(cc.Node)
+    loader: cc.Node = null;
 
     @property(cc.Node)
     overlay: cc.Node = null;
@@ -49,6 +52,20 @@ export default class GameScene extends cc.Component {
     abilities: Abilities = null;
 
     start() {
+        this.loader.active = true;
+
+        setTimeout(function() {
+            this.loader.active = false;
+            let anim = this.node.getComponent(cc.Animation);
+            let clip = anim.defaultClip;
+
+            playAnimOnce(anim, clip, this.node, () => {
+                this.init();
+            })
+        }.bind(this), 3000);
+    }
+
+    init() {
         this.cards.init(this);
         this.abilities.init(this);
         this.myHand = [];
@@ -250,7 +267,7 @@ export default class GameScene extends cc.Component {
     }
 
     private startTimer() {
-        this.timerNode.width = 0;
+        this.timerNode.width = 1020;
 
         if (this.myTurn)
             this.timerNode.color = UserInfo.getUser().playerTeam == Teams.Team1 ? GameInfo.TEAM1_COLOR : GameInfo.TEAM2_COLOR;
@@ -258,21 +275,21 @@ export default class GameScene extends cc.Component {
             this.timerNode.color = UserInfo.getUser().playerTeam == Teams.Team1 ? GameInfo.TEAM2_COLOR : GameInfo.TEAM1_COLOR;
 
         this.timer = setInterval(function (){
-            this.timerNode.width += 51;
+            this.timerNode.width -= 51;
         }.bind(this), 1000);
 
         setTimeout(() => {
-            if (!this.playedCard)
+            if (!this.playedCard && this.myTurn)
                 this.placeCard(getRandomElement(this.myHand));
 
             clearInterval(this.timer);
-            this.timerNode.width = 0;
+            this.timerNode.width = 1020;
         }, GameInfo.TIMER * 1000);
     }
 
     private stopTimer() {
         clearInterval(this.timer);
-        this.timerNode.width = 0;
+        this.timerNode.width = 1020;
     }
 
     private switchPlayer() {

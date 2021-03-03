@@ -49,3 +49,40 @@ export function generateUuid4(engine? : RandomFunc) {
 	}
 	return Random.uuid4(engine);
 }
+
+class AnimationTarget {
+	play(animation: cc.Animation, clip?: string, onFinished?: any, target?: any) {
+		animation.targetOff(this);
+		animation.stop();
+		//
+		animation.play(clip);
+		animation.once('finished', () => {
+			if (cc.isValid(onFinished)) {
+				if (cc.isValid(target)) {
+					onFinished.apply(target);
+				} else {
+					onFinished();
+				}
+			}
+		}, this);
+	}
+}
+
+export function playAnimOnce(animation: cc.Animation, clip: cc.AnimationClip | string, target?: any, onFinished?: (arg1?: any, arg2?: any, arg3?: any, arg4?: any, arg5?: any) => any, playAfterDelay: number = 0) {
+	let clipName = "";
+	if (clip) {
+		if (clip instanceof cc.AnimationClip) {
+			clipName = clip.name;
+		} else {
+			clipName = clip;
+		}
+	}
+	let func = () => {
+		(new AnimationTarget()).play(animation, clipName, onFinished, target);
+	}
+	if (playAfterDelay > 0) {
+		this.delayCall(playAfterDelay, func, animation.node);
+	} else {
+		func();
+	}
+}

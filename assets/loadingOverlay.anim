@@ -9,7 +9,7 @@
   "wrapMode": 2,
   "curveData": {
     "paths": {
-      "loadingOverlay/timer/spinner": {
+      "timer/spinner": {
         "props": {
           "angle": [
             {
