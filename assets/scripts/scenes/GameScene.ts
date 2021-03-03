@@ -15,6 +15,9 @@ export default class GameScene extends cc.Component {
     @property(cc.Node)
     timerNode: cc.Node = null;
 
+    @property(cc.Node)
+    overlay: cc.Node = null;
+
     @property(cc.Label)
     roundAttributeLabel: cc.Label = null;
 
@@ -52,6 +55,7 @@ export default class GameScene extends cc.Component {
         this.firstRound = true;
         this.playedCard = false;
         this.turnEndInProgress = false;
+        this.myTurn = true;
 
         this.populatePlayers();
         this.populateHealth();
@@ -66,9 +70,7 @@ export default class GameScene extends cc.Component {
         if (this.turnEndInProgress)
             return;
 
-        if (this.myTurn)
-            this.stopTimer();
-
+        this.stopTimer();
         this.switchPlayer();
     }
 
@@ -138,13 +140,24 @@ export default class GameScene extends cc.Component {
 
     //TODO shows Round info and then dissipates
     private showRound() {
+        this.overlay.active = true;
+        let label = this.overlay.getChildByName("label").getComponent(cc.Label);
+        if (this.myTurn) {
+            label.string = "Your Turn";
+            this.overlay.color = UserInfo.getUser().playerTeam == Teams.Team1 ? GameInfo.TEAM1_COLOR : GameInfo.TEAM2_COLOR;
+        } else {
+            label.string = "Opponent's Turn";
+            this.overlay.color = UserInfo.getUser().playerTeam == Teams.Team1 ? GameInfo.TEAM2_COLOR : GameInfo.TEAM1_COLOR;
+        }
+
         setTimeout(function() {
+            this.overlay.active = false;
             this.roundAttribute = getRandomInt(0, 2);
             this.setRoundAttribute();
             let func = this.firstRound ? this.firstRoundStarted : this.roundStarted;
             this.disableDamageArrows();
             GameController.getInstance().startRound(this.roundAttribute, func.bind(this));
-        }.bind(this), 5000);
+        }.bind(this), 2000);
     }
 
     private setRoundAttribute() {
@@ -191,13 +204,13 @@ export default class GameScene extends cc.Component {
         this.slotWaiting(currentTurn);
 
         if (this.myTurn) {
-            this.startTimer();
             this.cards.enablePlacing();
             this.abilities.toggleAbilities();
         } else {
             this.cards.disablePlacing();
             this.abilities.toggleAbilities(false);
         }
+        this.startTimer();
 
         console.log("Next Round: myTurn?"+this.myTurn);
 
@@ -237,28 +250,29 @@ export default class GameScene extends cc.Component {
     }
 
     private startTimer() {
-        this.timerNode.active = true;
+        this.timerNode.width = 0;
 
-        let label = this.timerNode.getChildByName("watch").getChildByName("timeLabel").getComponent(cc.Label);
-        let cooldown = GameInfo.TIMER;
+        if (this.myTurn)
+            this.timerNode.color = UserInfo.getUser().playerTeam == Teams.Team1 ? GameInfo.TEAM1_COLOR : GameInfo.TEAM2_COLOR;
+        else
+            this.timerNode.color = UserInfo.getUser().playerTeam == Teams.Team1 ? GameInfo.TEAM2_COLOR : GameInfo.TEAM1_COLOR;
 
         this.timer = setInterval(function (){
-            label.string = cooldown.toString();
-            --cooldown;
-        }.bind(this, cooldown), 1000);
+            this.timerNode.width += 51;
+        }.bind(this), 1000);
 
         setTimeout(() => {
             if (!this.playedCard)
                 this.placeCard(getRandomElement(this.myHand));
 
             clearInterval(this.timer);
-            this.timerNode.active = false;
-        }, cooldown * 1000);
+            this.timerNode.width = 0;
+        }, GameInfo.TIMER * 1000);
     }
 
     private stopTimer() {
         clearInterval(this.timer);
-        this.timerNode.active = false;
+        this.timerNode.width = 0;
     }
 
     private switchPlayer() {
@@ -270,28 +284,40 @@ export default class GameScene extends cc.Component {
             return;
         }
 
-        this.myTurn = !this.myTurn;
-        this.otherPlayed = true;
+        this.overlay.active = true;
+        let label = this.overlay.getChildByName("label").getComponent(cc.Label);
+        if (!this.myTurn) {
+            label.string = "Your Turn";
+            this.overlay.color = UserInfo.getUser().playerTeam == Teams.Team1 ? GameInfo.TEAM1_COLOR : GameInfo.TEAM2_COLOR;
+        } else {
+            label.string = "Opponent's Turn";
+            this.overlay.color = UserInfo.getUser().playerTeam == Teams.Team1 ? GameInfo.TEAM2_COLOR : GameInfo.TEAM1_COLOR;
+        }
 
-        console.log("Player Switched: myTurn?"+this.myTurn);
-        this.noOfPlayersDone = 0;
-        this.setupBots(this.myTurn);
+        setTimeout(() => {
+            this.overlay.active = false;
+            this.myTurn = !this.myTurn;
+            this.otherPlayed = true;
 
-        let team: Teams;
-        if(this.myTurn) {
-            team = UserInfo.getUser().playerTeam;
-            this.cards.enablePlacing();
-            this.abilities.toggleAbilities();
+            console.log("Player Switched: myTurn?" + this.myTurn);
+            this.noOfPlayersDone = 0;
+            this.setupBots(this.myTurn);
+
+            let team: Teams;
+            if (this.myTurn) {
+                team = UserInfo.getUser().playerTeam;
+                this.cards.enablePlacing();
+                this.abilities.toggleAbilities();
+            } else {
+                team = UserInfo.getUser().playerTeam == Teams.Team1 ? Teams.Team2 : Teams.Team1;
+                this.cards.disablePlacing();
+                this.abilities.toggleAbilities(false);
+            }
+
             this.startTimer();
-        }
-        else {
-            team = UserInfo.getUser().playerTeam == Teams.Team1 ? Teams.Team2 : Teams.Team1;
-            this.cards.disablePlacing();
-            this.abilities.toggleAbilities(false);
-        }
-
-        this.slotWaiting(team);
-        this.turnEndInProgress = false;
+            this.slotWaiting(team);
+            this.turnEndInProgress = false;
+        }, 2000);
     }
 
     private endRound() {

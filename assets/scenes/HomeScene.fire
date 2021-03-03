@@ -174,7 +174,7 @@
       "array": [
         0,
         0,
-        935.3074360871938,
+        419.15629543166835,
         0,
         0,
         0,
@@ -5182,7 +5182,7 @@
       }
     ],
     "_N$interactable": false,
-    "_N$enableAutoGrayEffect": false,
+    "_N$enableAutoGrayEffect": true,
     "_N$transition": 3,
     "transition": 3,
     "_N$normalColor": {
