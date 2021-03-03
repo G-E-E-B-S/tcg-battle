@@ -19,6 +19,9 @@ export default class GameScene extends cc.Component {
     loader: cc.Node = null;
 
     @property(cc.Node)
+    gameEnd: cc.Node = null;
+
+    @property(cc.Node)
     overlay: cc.Node = null;
 
     @property(cc.Label)
@@ -155,7 +158,6 @@ export default class GameScene extends cc.Component {
         this.oppHealth.getChildByName("healthLabel").getComponent(cc.Label).string = GameInfo.MAX_HEALTH.toString();
     }
 
-    //TODO shows Round info and then dissipates
     private showRound() {
         this.overlay.active = true;
         let label = this.overlay.getChildByName("label").getComponent(cc.Label);
@@ -418,9 +420,14 @@ export default class GameScene extends cc.Component {
         arrow.active = false;
     }
 
-    // TODO this should be done with a popup or something
     private declareGameEnd(isWinning:boolean) {
+        this.gameEnd.active = true;
 
+        let label = this.gameEnd.getChildByName("brownOverlay").getChildByName("long_scroll").getChildByName("roundStatus").getComponent(cc.Label);
+        label.string = isWinning ? "YOU WON" : "YOU LOST";
+
+        this.gameEnd.getChildByName("brownOverlay").getChildByName("long_scroll").getChildByName("gameWinSprite").active = isWinning;
+        this.gameEnd.getChildByName("brownOverlay").getChildByName("long_scroll").getChildByName("gameLoseSprite").active = !isWinning;
     }
 
     private timer: any;
