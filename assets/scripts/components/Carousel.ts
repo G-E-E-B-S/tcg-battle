@@ -1,11 +1,12 @@
 import { CardProps } from "../models/GameInfo";
+import BaseComponent from "./BaseComponent";
 import Card from "./Card";
 import Cards from "./Cards";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Carousel extends cc.Component {
+export default class Carousel extends BaseComponent {
 
     @property(cc.Prefab)
     itemPrefab: cc.Prefab = null;
@@ -21,24 +22,30 @@ export default class Carousel extends cc.Component {
 
     init(initialItems: Array<number>) {
         this.currentIndex = 0;
-        this.noOfItems = 0;
+        this.container.setCurrentPageIndex(this.currentIndex);
 
-        initialItems.forEach((item) => {
-            let node = cc.instantiate(this.itemPrefab);
-            let card = node.getComponent(Card);
-
-            card.setCardProps(item);
-
-            node.scale = 0.6;
-            this.addItem(node);
-        });
+        for (let item of initialItems) {
+            this.addCard(item);
+        }
 
         this.goToStartIndex();
     }
 
+    addCard(cardIdx: number) {
+        let node = cc.instantiate(this.itemPrefab);
+        let card = node.getComponent(Card);
+
+        card.setCardProps(cardIdx);
+
+        node.scale = 0.6;
+        this.addItem(node);
+    }
+
     goToStartIndex() {
+        this.currentIndex = 0;
         this.leftButton.interactable = false;
-        this.container.setCurrentPageIndex(0);
+        this.rightButton.interactable = true;
+        this.container.scrollToPage(this.currentIndex, 0.5);
         this.changeInfoInParent();
     }
 
@@ -53,7 +60,7 @@ export default class Carousel extends cc.Component {
     }
 
     onRight(_event) {
-        if (this.currentIndex == this.noOfItems - 2) {
+        if (this.currentIndex == 3) {
             this.rightButton.interactable = false;
         }
 
@@ -62,9 +69,19 @@ export default class Carousel extends cc.Component {
         this.changeInfoInParent();
     }
 
+    removeCard(card: number) {
+        let pages = this.container.getPages();
+        for (let item of pages) {
+            if (item.getComponent(Card).getIndex() == card) {
+                this.container.removePage(item);
+                break;
+            }
+        }
+        this.goToStartIndex();
+    }
+
     private addItem(item: cc.Node) {
         this.container.addPage(item);
-        ++this.noOfItems;
     }
 
     private changeInfoInParent() {
@@ -73,5 +90,4 @@ export default class Carousel extends cc.Component {
     }
 
     private currentIndex: number;
-    private noOfItems: number;
 }

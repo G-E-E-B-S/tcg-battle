@@ -1,7 +1,6 @@
 import { generateUuid4 } from "../utils/RandomUtils";
 import { User } from "./User";
 
-// TODO Needs heavy rework
 export class UserInfo {
 	private constructor() {
 		this.deviceID = generateUuid4();
@@ -22,9 +21,8 @@ export class UserInfo {
 		return UserInfo.instance.getUserID();
 	}
 
-	setUser(user: User, avatarIdx: number) {
+	setUser(user: User) {
 		this.user = user;
-		this.user.avatar = avatarIdx;
 	}
 
 	getUser(): User {

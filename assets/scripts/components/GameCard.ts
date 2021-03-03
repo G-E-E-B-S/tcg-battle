@@ -40,7 +40,34 @@ export default class GameCard extends cc.Component {
 		this.profile.spriteFrame = GameInfo.sprites.getSpriteFrame(prefix + idx);
 
 		this.attributeIcon.spriteFrame = this.attributeIcons[attribute];
-		this.attributeLabel.string = cardInfo.attributes[attribute].toString();
+		this.cardProp = cardInfo.attributes[attribute];
+		this.attributeLabel.string = this.cardProp.toString();
+		this.attributeLabel.node.color = GameInfo.DEFAULT_BOARDTEXT;
+	}
+
+	getCardProp() {
+		if (this.cardLabel.node.active)
+			return 0;
+
+		return this.cardProp;
+	}
+
+	enableBuff() {
+		if (this.cardLabel.node.active)
+			return;
+
+		this.cardProp = Math.round(this.cardProp * 1.1);
+		this.attributeLabel.string = this.cardProp.toString();
+		this.attributeLabel.node.color = GameInfo.TEAM1_COLOR;
+	}
+
+	enableDebuff() {
+		if (this.cardLabel.node.active)
+			return;
+
+		this.cardProp = Math.round(this.cardProp * 0.85);
+		this.attributeLabel.string = this.cardProp.toString();
+		this.attributeLabel.node.color = GameInfo.TEAM2_COLOR;
 	}
 
 	private toggleLabel(enable: boolean = true) {
@@ -61,4 +88,6 @@ export default class GameCard extends cc.Component {
 
 		return new cc.Color(colors[0], colors[1], colors[2], 255);
 	}
+
+	private cardProp: number;
 }

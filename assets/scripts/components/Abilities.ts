@@ -1,3 +1,4 @@
+import GameInfo from "../models/GameInfo";
 import GameScene from "../scenes/GameScene";
 
 const {ccclass, property} = cc._decorator;
@@ -19,27 +20,52 @@ export default class Abilities extends cc.Component {
 
 	init(gameScene) {
 		this.gameScene = gameScene;
+		this.coins = 0;
+		this.updateCoins(0);
+	}
+
+	toggleAbilities(enable: boolean = true) {
+		this.buffButton.interactable = enable;
+		this.debuffButton.interactable = enable;
+		this.cancelButton.interactable = enable;
+
+		if(enable)
+			this.updateCoins(0);
 	}
 
 	updateCoins(coins: number) {
-		this.teamCoins.string = coins.toString();
+		this.coins += coins
+		this.teamCoins.string = this.coins.toString();
 
-		this.buffButton.interactable = coins  >= 40;
-		this.debuffButton.interactable = coins  >= 60;
-		this.cancelButton.interactable = coins  >= 100;
+		this.buffButton.interactable = this.coins  >= 40;
+		this.debuffButton.interactable = this.coins  >= 60;
+		this.cancelButton.interactable = this.coins  >= 100;
 	}
 
 	onBuffAbility(_event) {
+		this.buffButton.interactable = false;
+		this.coins -= GameInfo.BUFF_POTION_COST;
+		this.teamCoins.string = this.coins.toString();
 
+		this.gameScene.activateBuff();
 	}
 
 	onDebuffAbility(_event) {
+		this.debuffButton.interactable = false;
+		this.coins -= GameInfo.DEBUFF_PORTION_COST;
+		this.teamCoins.string = this.coins.toString();
 
+		this.gameScene.activateDebuff();
 	}
 
 	onCancelAbility(_event) {
+		this.cancelButton.interactable = false;
+		this.coins -= GameInfo.FLIP_THE_TABLE_COST;
+		this.teamCoins.string = this.coins.toString();
 
+		this.gameScene.cancelCurrentRound();
 	}
 
 	private gameScene: GameScene;
+	private coins: number;
 }

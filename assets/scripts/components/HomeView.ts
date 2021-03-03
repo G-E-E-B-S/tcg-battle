@@ -28,7 +28,5 @@ export default class HomeView extends BaseComponent {
 		this.homeScene.changeToLobbyView();
 	}
 
-	cleanUp() {}
-
 	private homeScene: HomeScene;
 }

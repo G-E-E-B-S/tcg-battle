@@ -18,14 +18,6 @@ export class User {
 		this._name = value;
 	}
 
-	get avatar(): number {
-		return this._avatar;
-	}
-
-	set avatar(value: number) {
-		this._avatar = value;
-	}
-
 	get playerTeam(): Teams {
 		return this._playerTeam;
 	}
@@ -36,6 +28,5 @@ export class User {
 
 	private readonly id: string;
 	private _name: string;
-	private _avatar: number;
 	private _playerTeam: Teams;
 }

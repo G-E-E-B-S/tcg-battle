@@ -16,6 +16,18 @@ export function getRandomInt(min: number, max: number, engine? : RandomFunc): nu
 	return Random.integer(min, max)(engine)
 }
 
+export function getRandomIntWithExclusion(min: number, max: number, exclusions: Array<number>, engine? : RandomFunc): number {
+	if (!engine) {
+		engine = localEngine;
+	}
+
+	let rand = Random.integer(min, max)(engine);
+	while (exclusions.indexOf(rand) != -1)
+		rand = Random.integer(min, max)(engine);
+
+	return rand;
+}
+
 export function getRandomElement(array : Array<any>, engine? : RandomFunc) : any {
 	if (!array || array.length == 0) {
 		return null;

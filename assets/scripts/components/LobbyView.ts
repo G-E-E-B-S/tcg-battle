@@ -70,10 +70,8 @@ export default class LobbyView extends BaseComponent {
 	}
 
 	onGameStart(_event) {
-
+		this.homeScene.startGame();
 	}
-
-	cleanUp() {}
 
 	private addPlayer(player: User) {
 		let node = cc.instantiate(this.profilePrefab);
