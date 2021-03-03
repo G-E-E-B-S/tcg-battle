@@ -10,7 +10,7 @@ import TeamPicker from "./TeamPicker";
 
 const {ccclass, property} = cc._decorator;
 
-const botNames = ["Bot1", "Bot2", "Bot3", "Bot4", "Bot5", "Bot6", "Bot7"];
+const botNames = ["Oliver", "Abhas", "Vatsan", "Tanu", "Mohit", "Vaibhav", "Harshit", "Anil", "Ravi", "Prasanna", "Nobel", "Tanush"];
 
 @ccclass
 export default class LobbyView extends BaseComponent {

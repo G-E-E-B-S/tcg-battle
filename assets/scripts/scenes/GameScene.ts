@@ -24,6 +24,12 @@ export default class GameScene extends cc.Component {
     @property(cc.Node)
     overlay: cc.Node = null;
 
+    @property(cc.Node)
+    mySum: cc.Node = null;
+
+    @property(cc.Node)
+    oppSum: cc.Node = null;
+
     @property(cc.Label)
     roundAttributeLabel: cc.Label = null;
 
@@ -198,6 +204,8 @@ export default class GameScene extends cc.Component {
         this.debuffActive = false;
         this.playedCard = false;
         this.cancelActive = false;
+        this.mySum.active = false;
+        this.oppSum.active = false;
         this.cards.addCards(myHand);
         this.cards.enablePlacing();
         this.cards.deactivateBuff();
@@ -219,6 +227,8 @@ export default class GameScene extends cc.Component {
         this.debuffActive = false;
         this.cancelActive = false;
         this.playedCard = false;
+        this.mySum.active = false;
+        this.oppSum.active = false;
         this.cards.deactivateBuff();
         this.slotWaiting(currentTurn);
 
@@ -374,13 +384,26 @@ export default class GameScene extends cc.Component {
         let myPower = 0;
         let oppPower = 0;
 
+        let attrIco: Array<cc.SpriteFrame>;
         this.teamCardSlots.forEach((card) =>  {
+            if (!attrIco)
+                attrIco = card.attributeIcons;
+
             myPower += card.getCardProp();
         });
+        this.mySum.active = true;
+        this.mySum.color = UserInfo.getUser().playerTeam == Teams.Team1 ? GameInfo.TEAM1_COLOR : GameInfo.TEAM2_COLOR;
+        this.mySum.getChildByName("power_icon").getComponent(cc.Sprite).spriteFrame = attrIco[this.roundAttribute];
+        this.mySum.getChildByName("opponentSumlabel").getComponent(cc.Label).string = myPower.toString();
 
         this.oppCardSlots.forEach((card) => {
             oppPower += card.getCardProp();
         });
+        this.oppSum.active = true;
+        this.oppSum.color = UserInfo.getUser().playerTeam == Teams.Team1 ? GameInfo.TEAM2_COLOR : GameInfo.TEAM1_COLOR;
+        this.oppSum.getChildByName("power_icon").getComponent(cc.Sprite).spriteFrame = attrIco[this.roundAttribute];
+        this.oppSum.getChildByName("opponentSumlabel").getComponent(cc.Label).string = oppPower.toString();
+
 
         let mine = this.myTurn ? myPower : oppPower;
         let other = this.myTurn ? oppPower : myPower;
