@@ -23,6 +23,9 @@ export default class Card extends cc.Component {
     att3Label: cc.Label = null;
 
     @property(cc.Label)
+    cardName: cc.Label = null;
+
+    @property(cc.Label)
     desc: cc.Label = null;
 
     setCardProps(idx: number) {
@@ -36,6 +39,8 @@ export default class Card extends cc.Component {
         this.att1Label.string = cardInfo.attributes[0].toString();
         this.att2Label.string = cardInfo.attributes[1].toString();
         this.att3Label.string = cardInfo.attributes[2].toString();
+
+        this.cardName.string = cardInfo.name;
 
         this.desc.string = cardInfo.tooltip;
     }

@@ -1,37 +1,37 @@
 [{
   "name": "Deus Vult",
   "color": "#990002",
-  "tooltip": "",
+  "tooltip": "Get ready for some holy retribution",
   "attributes": [490, 346, 402]
 }, {
   "name": "Cold Steel",
   "color": "#609ffc",
-  "tooltip": "",
+  "tooltip": "Lick my sword I dare you!",
   "attributes": [346, 490, 474]
 }, {
   "name": "Golden Rod",
   "color": "#e07a16",
-  "tooltip": "",
+  "tooltip": "I'm sparkly but not that kinda sparkly",
   "attributes": [426, 450, 354]
 }, {
   "name": "The Vegan Knight",
   "color": "#285c1a",
-  "tooltip": "",
+  "tooltip": "A whole different kind of insufferable",
   "attributes": [450, 394, 306]
 }, {
   "name": "Cupid's Right Hand",
   "color": "#feb4b5",
-  "tooltip": "",
+  "tooltip": "Stronger than Cupid's left hand",
   "attributes": [274, 402, 450]
 }, {
   "name": "The Neutral Knight",
   "color": "#9d9d9d",
-  "tooltip": "",
+  "tooltip": "Meh!",
   "attributes":  [434, 482, 258]
 }, {
   "name": "Sir Eggplant",
   "color": "#896ec7",
-  "tooltip": "",
+  "tooltip": "Got knighted under mysterious circumstances",
   "attributes": [410, 458, 490]
 }, {
   "name": "OwO",
@@ -46,106 +46,106 @@
 }, {
   "name": "Probably Evil",
   "color": "#f40201",
-  "tooltip": "",
+  "tooltip": "Heeyyy I'm a good guy",
   "attributes": [290, 274, 330]
 }, {
   "name": "Comrade Fuzzybottom",
   "color": "#fba5a6",
-  "tooltip": "",
+  "tooltip": "It's smotherin time!",
   "attributes": [418, 418, 346]
 }, {
   "name": "Definitely Evil",
   "color": "#971d66",
-  "tooltip": "",
+  "tooltip": "Muahahaha!",
   "attributes": [482, 474, 370]
 }, {
   "name": "The Iron Curtain",
   "color": "#ab7c2c",
-  "tooltip": "",
+  "tooltip": "Dare to peek under the curtain",
   "attributes": [362, 258, 466]
 }, {
   "name": "The Grasshopper",
   "color": "#a3ee55",
-  "tooltip": "",
+  "tooltip": "Fun times and decapitation",
   "attributes": [250, 250, 298]
 }, {
   "name": "The Myopic Knight",
   "color": "#9d9d9d",
-  "tooltip": "",
+  "tooltip": "Come at bro, but first come closer",
   "attributes": [370, 426, 482]
 }, {
   "name": "Diamond Face",
   "color": "#971d66",
-  "tooltip": "",
+  "tooltip": "You think it's easy seeing through a slit",
   "attributes": [386, 282, 290]
 }, {
   "name": "Wannabe Skeletor",
   "color": "#9d9d9d",
-  "tooltip": "",
+  "tooltip": "Be the He-Man I wanna destroy",
   "attributes": [378, 434, 322]
 }, {
   "name": "The Big Chomp",
   "color": "#ffff2b",
-  "tooltip": "",
+  "tooltip": "Gimme something to nibble on",
   "attributes": [306, 330, 314]
 }, {
   "name": "Pointy Head",
   "color": "#971d66",
-  "tooltip": "",
+  "tooltip": "Chaaaaaarge!",
   "attributes": [394, 338, 442]
 }, {
   "name": "Vader Voice",
   "color": "#55593e",
-  "tooltip": "",
+  "tooltip": "Choke me harder daddy",
   "attributes": [466, 498, 378]
 }, {
   "name": "Cliche Merc",
   "color": "#725327",
-  "tooltip": "",
+  "tooltip": "Show me the money!",
   "attributes": [354, 314, 386]
 }, {
   "name": "Poke-a-holes",
   "color": "#c6a352",
-  "tooltip": "",
+  "tooltip": "Time for a swiss cheese look alike contest",
   "attributes": [402, 442, 394]
 }, {
   "name": "Hell's Umpire",
   "color": "#555555",
-  "tooltip": "",
+  "tooltip": "In my court, it's always a foul!",
   "attributes": [258, 370, 418]
 }, {
   "name": "Lord Bushybrows",
   "color": "#ff692a",
-  "tooltip": "",
+  "tooltip": "Bask in my bushy glory",
   "attributes": [266, 306, 250]
 }, {
   "name": "Terminator Vibes",
   "color": "#71c6ff",
-  "tooltip": "",
+  "tooltip": "Might I interest you in Skynet",
   "attributes": [298, 266, 410]
 }, {
   "name": "IHoles",
   "color": "#c6a352",
-  "tooltip": "",
+  "tooltip": "Know your place Android trash",
   "attributes": [442, 354, 498]
 }, {
   "name": "Silent But Deadly",
   "color": "#3d47a9",
-  "tooltip": "",
+  "tooltip": "Shhhhhhhhh!",
   "attributes": [282, 410, 426]
 }, {
   "name": "Not Robocop",
   "color": "#6a3756",
-  "tooltip": "",
+  "tooltip": "You're being rescued, please do not resist",
   "attributes": [458, 322, 434]
 }, {
   "name": "Igloooz",
   "color": "#2e8fb9",
-  "tooltip": "",
+  "tooltip": "No Eskimo pie for you!",
   "attributes": [330, 466, 338]
 }, {
   "name": "Buzz Buzz Kill",
   "color": "#4d2b81",
-  "tooltip": "",
+  "tooltip": "Yaasss Qween!",
   "attributes": [314, 298, 362]
 }]
